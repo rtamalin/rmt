@@ -6,20 +6,26 @@ Thu Aug 28 10:16:11 UTC 2025 - Jesús Bermúdez Velázquez <jesus.bv@suse.com>
     * Do not decode instance data coming from the system (bsc#1248510)
 
 -------------------------------------------------------------------
-Thu Aug 25 15:50:24 UTC 2025 - Fergal Mc Carthy <fmccarthy@suse.com>
+Tue Aug 26 17:01:35 UTC 2025 - Fergal Mc Carthy <fmccarthy@suse.com>
+
+- Version 2.23.4
+  * hopefully fix DB deadlock
+
+-------------------------------------------------------------------
+Mon Aug 25 15:50:24 UTC 2025 - Fergal Mc Carthy <fmccarthy@suse.com>
 
 - Version 2.23.3
   * fix scc_proxy reference to hwinfo_params
 
 -------------------------------------------------------------------
-Wed Aug 24 14:39:13 UTC 2025 - Fergal Mc Carthy <fmccarthy@suse.com>
+Sun Aug 24 14:39:13 UTC 2025 - Fergal Mc Carthy <fmccarthy@suse.com>
 
 - Version 2.23.2
   * enhanced hacking to create linking table between systems and
     system_data_profiles.
 
 -------------------------------------------------------------------
-Tue Aug 23 13:28:02 UTC 2025 - Fergal Mc Carthy <fmccarthy@suse.com>
+Sat Aug 23 13:28:02 UTC 2025 - Fergal Mc Carthy <fmccarthy@suse.com>
 
 - Version 2.23.1
   * exploratory hacking for Data Profiles collection
