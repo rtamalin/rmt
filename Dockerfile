@@ -7,6 +7,10 @@ RUN zypper --non-interactive install libffi-devel libmysqlclient-devel libxml2-d
                         make chrpath fdupes gcc libcurl-devel libyaml-devel \
                         ansible python3-PyMySQL
 
+RUN zypper --non-interactive install python3-pip && \
+    pip3 install --user ansible-lint && \
+    ln -s /root/.local/bin/ansible-lint /usr/bin
+
 WORKDIR /srv/www/rmt/
 
 COPY Gemfile Gemfile.lock /srv/www/rmt/

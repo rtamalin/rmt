@@ -42,15 +42,15 @@ help: ## Show this help message
 
 ansible-test: build ## Run Ansible tests in container
 	@echo "==> Running Ansible playbook tests in openSUSE Leap 16.0 container..."
-	docker compose run --rm rmt bash -c "cd /srv/www/rmt/ansible && ansible-playbook tests/test_playbook.yml"
+	docker compose run --rm rmt bash -c "cd ansible && ansible-playbook tests/test_playbook.yml"
 	@echo "==> All tests passed!"
 
-ansible-lint: ## Lint Ansible playbooks and roles (requires local ansible installation)
+ansible-lint: build ## Lint Ansible playbooks and roles in container
 	@echo "==> Checking Ansible playbook syntax..."
-	cd ansible && ansible-playbook site.yml --syntax-check
+	docker compose run --rm rmt bash -c "cd ansible && ansible-playbook site.yml --syntax-check"
 	@echo "==> Linting Ansible playbooks and roles..."
-	cd ansible && ansible-lint site.yml
-	cd ansible && ansible-lint roles/rmt/
+	docker compose run --rm rmt bash -c "cd ansible && ansible-lint site.yml"
+	docker compose run --rm rmt bash -c "cd ansible && ansible-lint roles/rmt/"
 	@echo "==> All checks passed!"
 
 # =============================================================================
