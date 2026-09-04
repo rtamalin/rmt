@@ -1,12 +1,15 @@
 # Wraps Typhoeus request in a fiber, resumes the fiber in callbacks.
+# Catches exceptions from the on_complete callback and stores them on the downloader
+# to prevent them from being swallowed by the event loop.
 class RMT::FiberRequest < RMT::HttpRequest
   attr_accessor :base_url, :download_path, :remote_file
 
-  def initialize(base_url, download_path:, request_fiber:, **options)
+  def initialize(base_url, download_path:, request_fiber:, downloader:, **options)
     @base_url = base_url
     @download_path = download_path
     @request_fiber = request_fiber
     @remote_file = base_url.split('?').first
+    @downloader = downloader
 
     super(base_url, options)
 
@@ -16,8 +19,9 @@ class RMT::FiberRequest < RMT::HttpRequest
       @download_path.write(chunk)
     end
     on_complete do |response|
-      @request_fiber.resume(response) unless response.return_code == :ok # otherwise skips on_headers resume when the request has failed
-      @request_fiber.resume(response) if @request_fiber.alive?
+      @request_fiber.resume(response)
+    rescue StandardError => e
+      @downloader.raised_exceptions << e
     end
   end
 
